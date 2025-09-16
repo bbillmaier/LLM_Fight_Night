@@ -1,0 +1,22 @@
+/* The CSS is jank. Please Don't judge. Well this one is fine I guess.... */
+
+.battleZone {
+    display: block;
+    width: 800px;
+    margin: 0 auto;
+    background: #f0f0f0;
+    border: 1px solid #000;
+    padding: 15px;
+    border-radius: 0px;
+    margin-top: 25px;
+    height: 290px;
+    overflow-y: scroll;
+    margin-bottom: 25px;
+}
+
+.singleResponse {
+    background: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
