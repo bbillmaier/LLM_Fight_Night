@@ -15,3 +15,7 @@ AI generated descriptions of action.
 React + TypeScript
 
 API call to KoboldCPP
+
+### Dependencies
+
+Narration requires KoboldCPP available here:https://github.com/LostRuins/koboldcpp built and tested using a .guff quantized version of a LLM.
