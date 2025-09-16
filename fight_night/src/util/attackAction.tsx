@@ -1,4 +1,3 @@
-// src/AttackUtil.tsx
 import React from "react";
 import type { CharValues } from "../baseValues/charValues";
 import type { AttackOutcome } from "../baseValues/attackOutcome";
@@ -44,10 +43,7 @@ function buildAttack(
 ): { prompt: string; outcome: AttackOutcome } {
   if (who === "player") {
     //Just doing all the math to calculate an attack. Right now I'm assuming that every weapon uses strength. May add an option later to allow the user to select str, dex or fin (Whichever is greater)
-    //This is obviously a silly place to use UseMemo because it is such a cheap calculation. I just wanted to use it.
-    var toHitBonus = useMemo(function () {
-        return Math.floor((props.player.charStr - 10) / 2);
-      }, [props.player.charStr]);
+    var toHitBonus = Math.floor((props.player.charStr - 10) / 2);
     var attackRoll = getRandomInteger(1, 20) + toHitBonus;
     var rawDamage = toHitBonus + getRandomInteger(1, props.player.charWeaponDie);
     var damageDealt = Math.max(0, rawDamage);
@@ -85,10 +81,7 @@ function buildAttack(
   } else {
     //Basically the same code again. Really bad idea to do it this way cause now changes have to be dupped. Was having to much fun and really wanted to get to the part where I got to play with the LLM.
     //TODO: Refactor this to be a util that we can call and pass all the props too.
-    //again silly but I wanted to practice using it.
-    var toHitBonus2 = useMemo(function () {
-        return Math.floor((props.monster.charStr - 10) / 2);
-      }, [props.monster.charStr]);
+    var toHitBonus2 = Math.floor((props.monster.charStr - 10) / 2);
     var attackRoll2 = getRandomInteger(1, 20) + toHitBonus2;
     var rawDamage2 = toHitBonus2 + getRandomInteger(1, props.monster.charWeaponDie);
     var damageDealt2 = Math.max(0, rawDamage2);

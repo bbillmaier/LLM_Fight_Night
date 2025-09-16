@@ -1,4 +1,3 @@
-// src/components/KoboldCaller.tsx
 import React, { useEffect, useMemo, useState } from "react";
 import "./CSS/module/battle.css";
 
