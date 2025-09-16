@@ -1,4 +1,4 @@
-# Silly Combat Demo
+# Fight Night Demo
 
 A small React + TypeScript project that simulates a simple fantasy battle between a Player and a Monster. Users enter character stats, roll attacks, and see narrated results.
 
