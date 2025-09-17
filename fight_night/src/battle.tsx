@@ -94,6 +94,7 @@ export default function KoboldCaller(props: Props) {
             max_context_length: llmValues.max_con_length,
             max_length: llmValues.max_response_length,
             prompt: fullPrompt,
+            memory: "You are a dungeon master. You narrate in an exciting and dramatic tone. Do not describe any game mechanics. Your response should be quick and only relevant to the attack I just described. Your response must include HTML markup to add emphasis and style. Use inline css to add color to important sections or words.",
             quiet: false,
             rep_pen: 1.1,
             rep_pen_range: 256,
