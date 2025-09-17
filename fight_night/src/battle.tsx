@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./CSS/module/battle.css";
+import { llmValues } from "./baseValues/llmValues"
 
 type Props = { prompt: string };
 type KoboldResponse = { results: { text: string }[] };
@@ -17,6 +18,30 @@ const KOBOLD_URL = "http://localhost:5001/api/v1/generate";
 
 export default function KoboldCaller(props: Props) {
   const [history, setHistory] = useState<Entry[]>([]);
+  // Setting up default values
+  const [llmValues, setValues] = useState<llmValues>({
+    max_con_length: 2048,
+    max_response_length: 250,
+    temp: 1,
+  })
+
+  // The default change handler TODO: Probably should put this in a util so I don't keep rewriting it.
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const fieldName = event.target.name;
+    const fieldValue = event.target.value;
+
+    setValues({
+      ...llmValues,
+      [fieldName]: Number(fieldValue),
+    });
+  }
+  //Basic Submit
+  function submitLLMoptionsChange(e: React.FormEvent) {
+    e.preventDefault();
+    console.log("Updating LLM Options:", llmValues);
+  }
+
 
   // Make a unique ID for the current prompt
   const currentId = useMemo(function () {
@@ -66,14 +91,14 @@ export default function KoboldCaller(props: Props) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            max_context_length: 4096,
-            max_length: 500,
+            max_context_length: llmValues.max_con_length,
+            max_length: llmValues.max_response_length,
             prompt: fullPrompt,
             quiet: false,
             rep_pen: 1.1,
             rep_pen_range: 256,
             rep_pen_slope: 1,
-            temperature: 0.7,
+            temperature: Math.round(llmValues.temp * 100) / 100,
             tfs: 1,
             top_a: 0,
             top_k: 100,
@@ -120,8 +145,25 @@ export default function KoboldCaller(props: Props) {
     setHistory([]);
   }
 
+
   return (
     <section>
+      <div className="llmOptionsForm">
+        <div className="llmOptionsFormInner">
+            <form onSubmit={submitLLMoptionsChange}>
+              <label>
+                Context Length: <input type="number" name="max_con_length" value={llmValues.max_con_length} onChange={handleChange}></input>
+              </label>
+              <label>
+                Response Length: <input type="number" name="max_response_length" value={llmValues.max_response_length} onChange={handleChange}></input>
+              </label>
+              <label>
+                Creativity: <input type="number" name="temp" value={llmValues.temp} onChange={handleChange}></input>
+              </label>
+              <button type="submit">Update Settings</button>
+          </form>
+        </div>
+      </div>
       <div>
         <strong>Combat Narration</strong>
         <button type="button" onClick={clearHistory} style={{ marginLeft: "auto" }}>
