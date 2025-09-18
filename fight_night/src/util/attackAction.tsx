@@ -49,7 +49,7 @@ function defeatsFoe(hp: number, damage: number){
     var playerDefeatsMonster = defeatsFoe(props.monster.hp, damageDealt);
     var playerDescriptionPrompt: string = props.player.name + "'s description is " + props.player.charDescription;
     var monsterDescriptionPrompt: string = props.monster.name + "'s description is " + props.monster.charDescription;
-
+    console.log(props.player.charDescription);
     var prompt: string;
     if (hit === true) {
       if(playerDefeatsMonster === true){

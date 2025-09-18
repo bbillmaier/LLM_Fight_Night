@@ -84,7 +84,7 @@ function CharCard({ title, values, onChange, onAttack }: Props) {
       </select>
     </label>
       <div className="descriptions">
-        <label>Character Description <textarea name="charDescription"></textarea></label>
+        <label>Character Description <textarea name="charDescription"  value={values.charDescription} onChange={handleChange}></textarea></label>
       </div>
         </div>
         <button type="button" onClick={onAttack}>Attack!</button>
